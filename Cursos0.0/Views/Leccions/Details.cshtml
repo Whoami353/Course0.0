@@ -1,0 +1,66 @@
+﻿@model Cursos0._0.Models.Leccion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Leccion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Contenido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contenido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoLec)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoLec)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocumentoLec)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocumentoLec)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagLec)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImagLec)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Curso.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Curso.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

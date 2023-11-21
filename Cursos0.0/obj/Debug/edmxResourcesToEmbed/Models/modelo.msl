@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="modeloStoreContainer" CdmEntityContainer="modeloContainer">
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="IsTypeOf(modelo.Usuario)">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Instructores">
+      <EntityTypeMapping TypeName="IsTypeOf(modelo.Instructor)">
+        <MappingFragment StoreEntitySet="Instructores">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Idio_Cult" ColumnName="Idio_Cult" />
+          <ScalarProperty Name="Experiencia" ColumnName="Experiencia" />
+          <ScalarProperty Name="Disponibilidad" ColumnName="Disponibilidad" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="ImagIns" ColumnName="ImagIns" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estudiantes">
+      <EntityTypeMapping TypeName="IsTypeOf(modelo.Estudiante)">
+        <MappingFragment StoreEntitySet="Estudiantes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Idio_Cult" ColumnName="Idio_Cult" />
+          <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+          <ScalarProperty Name="ImagEst" ColumnName="ImagEst" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cursos">
+      <EntityTypeMapping TypeName="IsTypeOf(modelo.Curso)">
+        <MappingFragment StoreEntitySet="Cursos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+          <ScalarProperty Name="TpCurso" ColumnName="TpCurso" />
+          <ScalarProperty Name="ImagCrs" ColumnName="ImagCrs" />
+          <ScalarProperty Name="VideoIntr" ColumnName="VideoIntr" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="InstructorId" ColumnName="InstructorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetCrs_Est">
+      <EntityTypeMapping TypeName="IsTypeOf(modelo.DetCrs_Est)">
+        <MappingFragment StoreEntitySet="DetCrs_Est">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lecciones">
+      <EntityTypeMapping TypeName="IsTypeOf(modelo.Leccion)">
+        <MappingFragment StoreEntitySet="Lecciones">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="VideoLec" ColumnName="VideoLec" />
+          <ScalarProperty Name="DocumentoLec" ColumnName="DocumentoLec" />
+          <ScalarProperty Name="ImagLec" ColumnName="ImagLec" />
+          <ScalarProperty Name="CursoId" ColumnName="CursoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Evaluaciones">
+      <EntityTypeMapping TypeName="IsTypeOf(modelo.Evaluacion)">
+        <MappingFragment StoreEntitySet="Evaluaciones">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="DocumentoEva" ColumnName="DocumentoEva" />
+          <ScalarProperty Name="LeccionId" ColumnName="LeccionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResultadosEva">
+      <EntityTypeMapping TypeName="IsTypeOf(modelo.ResultadoEva)">
+        <MappingFragment StoreEntitySet="ResultadosEva">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+          <ScalarProperty Name="Valoracion" ColumnName="Valoracion" />
+          <ScalarProperty Name="EstudianteId" ColumnName="EstudianteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="UsuarioInstructor" TypeName="modelo.UsuarioInstructor" StoreEntitySet="Usuarios">
+      <EndProperty Name="Instructor">
+        <ScalarProperty Name="Id" ColumnName="Instructor_Id" />
+      </EndProperty>
+      <EndProperty Name="Usuario">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UsuarioEstudiante" TypeName="modelo.UsuarioEstudiante" StoreEntitySet="Usuarios">
+      <EndProperty Name="Estudiante">
+        <ScalarProperty Name="Id" ColumnName="Estudiante_Id" />
+      </EndProperty>
+      <EndProperty Name="Usuario">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EstudianteDetCrs_Est" TypeName="modelo.EstudianteDetCrs_Est" StoreEntitySet="Estudiantes">
+      <EndProperty Name="DetCrs_Est">
+        <ScalarProperty Name="Id" ColumnName="DetCrs_Est_Id" />
+      </EndProperty>
+      <EndProperty Name="Estudiante">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CursoDetCrs_Est" TypeName="modelo.CursoDetCrs_Est" StoreEntitySet="Cursos">
+      <EndProperty Name="DetCrs_Est">
+        <ScalarProperty Name="Id" ColumnName="DetCrs_Est_Id" />
+      </EndProperty>
+      <EndProperty Name="Curso">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EvaluacionResultadoEva" TypeName="modelo.EvaluacionResultadoEva" StoreEntitySet="ResultadosEva">
+      <EndProperty Name="Evaluacion">
+        <ScalarProperty Name="Id" ColumnName="Evaluacion_Id" />
+      </EndProperty>
+      <EndProperty Name="ResultadoEva">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EstudianteResultadoEva" TypeName="modelo.EstudianteResultadoEva" StoreEntitySet="Estudiantes">
+      <EndProperty Name="ResultadoEva">
+        <ScalarProperty Name="Id" ColumnName="ResultadoEva_Id" />
+      </EndProperty>
+      <EndProperty Name="Estudiante">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

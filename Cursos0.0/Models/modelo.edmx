@@ -1,0 +1,612 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="modelo.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cursos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nivel" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TpCurso" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImagCrs" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="VideoIntr" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="InstructorId" Type="int" Nullable="false" />
+          <Property Name="DetCrs_Est_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetCrs_Est">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estudiantes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Idio_Cult" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nivel" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImagEst" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DetCrs_Est_Id" Type="int" Nullable="false" />
+          <Property Name="ResultadoEva_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Evaluaciones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DocumentoEva" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LeccionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Instructores">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Idio_Cult" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Experiencia" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Disponibilidad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImagIns" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lecciones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Contenido" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="VideoLec" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DocumentoLec" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImagLec" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CursoId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ResultadosEva">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Comentario" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Valoracion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EstudianteId" Type="int" Nullable="false" />
+          <Property Name="Evaluacion_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Instructor_Id" Type="int" Nullable="false" />
+          <Property Name="Estudiante_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CursoDetCrs_Est">
+          <End Role="DetCrs_Est" Type="Self.DetCrs_Est" Multiplicity="1" />
+          <End Role="Cursos" Type="Self.Cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetCrs_Est">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cursos">
+              <PropertyRef Name="DetCrs_Est_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CursoLeccion">
+          <End Role="Cursos" Type="Self.Cursos" Multiplicity="1" />
+          <End Role="Lecciones" Type="Self.Lecciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cursos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lecciones">
+              <PropertyRef Name="CursoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstudianteDetCrs_Est">
+          <End Role="DetCrs_Est" Type="Self.DetCrs_Est" Multiplicity="1" />
+          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetCrs_Est">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estudiantes">
+              <PropertyRef Name="DetCrs_Est_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstudianteResultadoEva">
+          <End Role="ResultadosEva" Type="Self.ResultadosEva" Multiplicity="1" />
+          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResultadosEva">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estudiantes">
+              <PropertyRef Name="ResultadoEva_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EvaluacionResultadoEva">
+          <End Role="Evaluaciones" Type="Self.Evaluaciones" Multiplicity="1" />
+          <End Role="ResultadosEva" Type="Self.ResultadosEva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evaluaciones">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResultadosEva">
+              <PropertyRef Name="Evaluacion_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InstructorCurso">
+          <End Role="Instructores" Type="Self.Instructores" Multiplicity="1" />
+          <End Role="Cursos" Type="Self.Cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cursos">
+              <PropertyRef Name="InstructorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeccionEvaluacion">
+          <End Role="Lecciones" Type="Self.Lecciones" Multiplicity="1" />
+          <End Role="Evaluaciones" Type="Self.Evaluaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lecciones">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Evaluaciones">
+              <PropertyRef Name="LeccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioEstudiante">
+          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiantes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="Estudiante_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioInstructor">
+          <End Role="Instructores" Type="Self.Instructores" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="Instructor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="modeloStoreContainer">
+          <EntitySet Name="Cursos" EntityType="Self.Cursos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetCrs_Est" EntityType="Self.DetCrs_Est" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estudiantes" EntityType="Self.Estudiantes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Evaluaciones" EntityType="Self.Evaluaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Instructores" EntityType="Self.Instructores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lecciones" EntityType="Self.Lecciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResultadosEva" EntityType="Self.ResultadosEva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CursoDetCrs_Est" Association="Self.FK_CursoDetCrs_Est">
+            <End Role="DetCrs_Est" EntitySet="DetCrs_Est" />
+            <End Role="Cursos" EntitySet="Cursos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CursoLeccion" Association="Self.FK_CursoLeccion">
+            <End Role="Cursos" EntitySet="Cursos" />
+            <End Role="Lecciones" EntitySet="Lecciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstudianteDetCrs_Est" Association="Self.FK_EstudianteDetCrs_Est">
+            <End Role="DetCrs_Est" EntitySet="DetCrs_Est" />
+            <End Role="Estudiantes" EntitySet="Estudiantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstudianteResultadoEva" Association="Self.FK_EstudianteResultadoEva">
+            <End Role="ResultadosEva" EntitySet="ResultadosEva" />
+            <End Role="Estudiantes" EntitySet="Estudiantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EvaluacionResultadoEva" Association="Self.FK_EvaluacionResultadoEva">
+            <End Role="Evaluaciones" EntitySet="Evaluaciones" />
+            <End Role="ResultadosEva" EntitySet="ResultadosEva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstructorCurso" Association="Self.FK_InstructorCurso">
+            <End Role="Instructores" EntitySet="Instructores" />
+            <End Role="Cursos" EntitySet="Cursos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeccionEvaluacion" Association="Self.FK_LeccionEvaluacion">
+            <End Role="Lecciones" EntitySet="Lecciones" />
+            <End Role="Evaluaciones" EntitySet="Evaluaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioEstudiante" Association="Self.FK_UsuarioEstudiante">
+            <End Role="Estudiantes" EntitySet="Estudiantes" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioInstructor" Association="Self.FK_UsuarioInstructor">
+            <End Role="Instructores" EntitySet="Instructores" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="modelo" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="modeloContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Usuarios" EntityType="modelo.Usuario" />
+          <EntitySet Name="Instructores" EntityType="modelo.Instructor" />
+          <EntitySet Name="Estudiantes" EntityType="modelo.Estudiante" />
+          <EntitySet Name="Cursos" EntityType="modelo.Curso" />
+          <EntitySet Name="DetCrs_Est" EntityType="modelo.DetCrs_Est" />
+          <EntitySet Name="Lecciones" EntityType="modelo.Leccion" />
+          <EntitySet Name="Evaluaciones" EntityType="modelo.Evaluacion" />
+          <AssociationSet Name="UsuarioInstructor" Association="modelo.UsuarioInstructor">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Instructor" EntitySet="Instructores" />
+          </AssociationSet>
+          <AssociationSet Name="UsuarioEstudiante" Association="modelo.UsuarioEstudiante">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Estudiante" EntitySet="Estudiantes" />
+          </AssociationSet>
+          <AssociationSet Name="InstructorCurso" Association="modelo.InstructorCurso">
+            <End Role="Instructor" EntitySet="Instructores" />
+            <End Role="Curso" EntitySet="Cursos" />
+          </AssociationSet>
+          <AssociationSet Name="EstudianteDetCrs_Est" Association="modelo.EstudianteDetCrs_Est">
+            <End Role="Estudiante" EntitySet="Estudiantes" />
+            <End Role="DetCrs_Est" EntitySet="DetCrs_Est" />
+          </AssociationSet>
+          <AssociationSet Name="CursoDetCrs_Est" Association="modelo.CursoDetCrs_Est">
+            <End Role="Curso" EntitySet="Cursos" />
+            <End Role="DetCrs_Est" EntitySet="DetCrs_Est" />
+          </AssociationSet>
+          <AssociationSet Name="CursoLeccion" Association="modelo.CursoLeccion">
+            <End Role="Curso" EntitySet="Cursos" />
+            <End Role="Leccion" EntitySet="Lecciones" />
+          </AssociationSet>
+          <AssociationSet Name="LeccionEvaluacion" Association="modelo.LeccionEvaluacion">
+            <End Role="Leccion" EntitySet="Lecciones" />
+            <End Role="Evaluacion" EntitySet="Evaluaciones" />
+          </AssociationSet>
+          <EntitySet Name="ResultadosEva" EntityType="modelo.ResultadoEva" />
+          <AssociationSet Name="EvaluacionResultadoEva" Association="modelo.EvaluacionResultadoEva">
+            <End Role="Evaluacion" EntitySet="Evaluaciones" />
+            <End Role="ResultadoEva" EntitySet="ResultadosEva" />
+          </AssociationSet>
+          <AssociationSet Name="EstudianteResultadoEva" Association="modelo.EstudianteResultadoEva">
+            <End Role="Estudiante" EntitySet="Estudiantes" />
+            <End Role="ResultadoEva" EntitySet="ResultadosEva" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Instructor" Relationship="modelo.UsuarioInstructor" FromRole="Usuario" ToRole="Instructor" />
+          <NavigationProperty Name="Estudiante" Relationship="modelo.UsuarioEstudiante" FromRole="Usuario" ToRole="Estudiante" />
+        </EntityType>
+        <EntityType Name="Instructor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Idio_Cult" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Experiencia" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Disponibilidad" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ImagIns" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Usuario" Relationship="modelo.UsuarioInstructor" FromRole="Instructor" ToRole="Usuario" />
+          <NavigationProperty Name="Cursos" Relationship="modelo.InstructorCurso" FromRole="Instructor" ToRole="Curso" />
+        </EntityType>
+        <EntityType Name="Estudiante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Idio_Cult" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Nivel" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ImagEst" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Usuario" Relationship="modelo.UsuarioEstudiante" FromRole="Estudiante" ToRole="Usuario" />
+          <NavigationProperty Name="DetCrs_Est" Relationship="modelo.EstudianteDetCrs_Est" FromRole="Estudiante" ToRole="DetCrs_Est" />
+          <NavigationProperty Name="ResultadoEva" Relationship="modelo.EstudianteResultadoEva" FromRole="Estudiante" ToRole="ResultadoEva" />
+        </EntityType>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Nivel" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TpCurso" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ImagCrs" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="VideoIntr" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Instructor" Relationship="modelo.InstructorCurso" FromRole="Curso" ToRole="Instructor" />
+          <Property Name="InstructorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DetCrs_Est" Relationship="modelo.CursoDetCrs_Est" FromRole="Curso" ToRole="DetCrs_Est" />
+          <NavigationProperty Name="Lecciones" Relationship="modelo.CursoLeccion" FromRole="Curso" ToRole="Leccion" />
+        </EntityType>
+        <EntityType Name="DetCrs_Est">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Estudiante" Relationship="modelo.EstudianteDetCrs_Est" FromRole="DetCrs_Est" ToRole="Estudiante" />
+          <NavigationProperty Name="Curso" Relationship="modelo.CursoDetCrs_Est" FromRole="DetCrs_Est" ToRole="Curso" />
+        </EntityType>
+        <EntityType Name="Leccion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Contenido" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="VideoLec" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DocumentoLec" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ImagLec" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Curso" Relationship="modelo.CursoLeccion" FromRole="Leccion" ToRole="Curso" />
+          <Property Name="CursoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Evaluaciones" Relationship="modelo.LeccionEvaluacion" FromRole="Leccion" ToRole="Evaluacion" />
+        </EntityType>
+        <EntityType Name="Evaluacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DocumentoEva" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Leccion" Relationship="modelo.LeccionEvaluacion" FromRole="Evaluacion" ToRole="Leccion" />
+          <Property Name="LeccionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ResultadoEvas" Relationship="modelo.EvaluacionResultadoEva" FromRole="Evaluacion" ToRole="ResultadoEva" />
+        </EntityType>
+        <Association Name="UsuarioInstructor">
+          <End Type="modelo.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="modelo.Instructor" Role="Instructor" Multiplicity="1" />
+        </Association>
+        <Association Name="UsuarioEstudiante">
+          <End Type="modelo.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="modelo.Estudiante" Role="Estudiante" Multiplicity="1" />
+        </Association>
+        <Association Name="InstructorCurso">
+          <End Type="modelo.Instructor" Role="Instructor" Multiplicity="1" />
+          <End Type="modelo.Curso" Role="Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Curso">
+              <PropertyRef Name="InstructorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EstudianteDetCrs_Est">
+          <End Type="modelo.Estudiante" Role="Estudiante" Multiplicity="1" />
+          <End Type="modelo.DetCrs_Est" Role="DetCrs_Est" Multiplicity="1" />
+        </Association>
+        <Association Name="CursoDetCrs_Est">
+          <End Type="modelo.Curso" Role="Curso" Multiplicity="1" />
+          <End Type="modelo.DetCrs_Est" Role="DetCrs_Est" Multiplicity="1" />
+        </Association>
+        <Association Name="CursoLeccion">
+          <End Type="modelo.Curso" Role="Curso" Multiplicity="1" />
+          <End Type="modelo.Leccion" Role="Leccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Leccion">
+              <PropertyRef Name="CursoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LeccionEvaluacion">
+          <End Type="modelo.Leccion" Role="Leccion" Multiplicity="1" />
+          <End Type="modelo.Evaluacion" Role="Evaluacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Leccion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Evaluacion">
+              <PropertyRef Name="LeccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ResultadoEva">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comentario" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Valoracion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Evaluacion" Relationship="modelo.EvaluacionResultadoEva" FromRole="ResultadoEva" ToRole="Evaluacion" />
+          <Property Name="EstudianteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Estudiante" Relationship="modelo.EstudianteResultadoEva" FromRole="ResultadoEva" ToRole="Estudiante" />
+        </EntityType>
+        <Association Name="EvaluacionResultadoEva">
+          <End Type="modelo.Evaluacion" Role="Evaluacion" Multiplicity="1" />
+          <End Type="modelo.ResultadoEva" Role="ResultadoEva" Multiplicity="*" />
+        </Association>
+        <Association Name="EstudianteResultadoEva">
+          <End Type="modelo.Estudiante" Role="Estudiante" Multiplicity="1" />
+          <End Type="modelo.ResultadoEva" Role="ResultadoEva" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="modeloStoreContainer" CdmEntityContainer="modeloContainer">
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="IsTypeOf(modelo.Usuario)">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Instructores">
+      <EntityTypeMapping TypeName="IsTypeOf(modelo.Instructor)">
+        <MappingFragment StoreEntitySet="Instructores">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Idio_Cult" ColumnName="Idio_Cult" />
+          <ScalarProperty Name="Experiencia" ColumnName="Experiencia" />
+          <ScalarProperty Name="Disponibilidad" ColumnName="Disponibilidad" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="ImagIns" ColumnName="ImagIns" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estudiantes">
+      <EntityTypeMapping TypeName="IsTypeOf(modelo.Estudiante)">
+        <MappingFragment StoreEntitySet="Estudiantes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Idio_Cult" ColumnName="Idio_Cult" />
+          <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+          <ScalarProperty Name="ImagEst" ColumnName="ImagEst" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cursos">
+      <EntityTypeMapping TypeName="IsTypeOf(modelo.Curso)">
+        <MappingFragment StoreEntitySet="Cursos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+          <ScalarProperty Name="TpCurso" ColumnName="TpCurso" />
+          <ScalarProperty Name="ImagCrs" ColumnName="ImagCrs" />
+          <ScalarProperty Name="VideoIntr" ColumnName="VideoIntr" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="InstructorId" ColumnName="InstructorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetCrs_Est">
+      <EntityTypeMapping TypeName="IsTypeOf(modelo.DetCrs_Est)">
+        <MappingFragment StoreEntitySet="DetCrs_Est">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lecciones">
+      <EntityTypeMapping TypeName="IsTypeOf(modelo.Leccion)">
+        <MappingFragment StoreEntitySet="Lecciones">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="VideoLec" ColumnName="VideoLec" />
+          <ScalarProperty Name="DocumentoLec" ColumnName="DocumentoLec" />
+          <ScalarProperty Name="ImagLec" ColumnName="ImagLec" />
+          <ScalarProperty Name="CursoId" ColumnName="CursoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Evaluaciones">
+      <EntityTypeMapping TypeName="IsTypeOf(modelo.Evaluacion)">
+        <MappingFragment StoreEntitySet="Evaluaciones">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="DocumentoEva" ColumnName="DocumentoEva" />
+          <ScalarProperty Name="LeccionId" ColumnName="LeccionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResultadosEva">
+      <EntityTypeMapping TypeName="IsTypeOf(modelo.ResultadoEva)">
+        <MappingFragment StoreEntitySet="ResultadosEva">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+          <ScalarProperty Name="Valoracion" ColumnName="Valoracion" />
+          <ScalarProperty Name="EstudianteId" ColumnName="EstudianteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="UsuarioInstructor" TypeName="modelo.UsuarioInstructor" StoreEntitySet="Usuarios">
+      <EndProperty Name="Instructor">
+        <ScalarProperty Name="Id" ColumnName="Instructor_Id" />
+      </EndProperty>
+      <EndProperty Name="Usuario">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UsuarioEstudiante" TypeName="modelo.UsuarioEstudiante" StoreEntitySet="Usuarios">
+      <EndProperty Name="Estudiante">
+        <ScalarProperty Name="Id" ColumnName="Estudiante_Id" />
+      </EndProperty>
+      <EndProperty Name="Usuario">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EstudianteDetCrs_Est" TypeName="modelo.EstudianteDetCrs_Est" StoreEntitySet="Estudiantes">
+      <EndProperty Name="DetCrs_Est">
+        <ScalarProperty Name="Id" ColumnName="DetCrs_Est_Id" />
+      </EndProperty>
+      <EndProperty Name="Estudiante">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CursoDetCrs_Est" TypeName="modelo.CursoDetCrs_Est" StoreEntitySet="Cursos">
+      <EndProperty Name="DetCrs_Est">
+        <ScalarProperty Name="Id" ColumnName="DetCrs_Est_Id" />
+      </EndProperty>
+      <EndProperty Name="Curso">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EvaluacionResultadoEva" TypeName="modelo.EvaluacionResultadoEva" StoreEntitySet="ResultadosEva">
+      <EndProperty Name="Evaluacion">
+        <ScalarProperty Name="Id" ColumnName="Evaluacion_Id" />
+      </EndProperty>
+      <EndProperty Name="ResultadoEva">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EstudianteResultadoEva" TypeName="modelo.EstudianteResultadoEva" StoreEntitySet="Estudiantes">
+      <EndProperty Name="ResultadoEva">
+        <ScalarProperty Name="Id" ColumnName="ResultadoEva_Id" />
+      </EndProperty>
+      <EndProperty Name="Estudiante">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

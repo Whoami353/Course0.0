@@ -1,0 +1,80 @@
+﻿@model Cursos0._0.Models.Curso
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Curso</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nivel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nivel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TpCurso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TpCurso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagCrs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImagCrs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoIntr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoIntr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Instructor.Idio_Cult)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Instructor.Idio_Cult)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
