@@ -51,8 +51,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Nombre" Type="String" Nullable="false" />
-    <Property Name="Email" Type="String" Nullable="false" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Instructor" Relationship="modelo.UsuarioInstructor" FromRole="Usuario" ToRole="Instructor" />
     <NavigationProperty Name="Estudiante" Relationship="modelo.UsuarioEstudiante" FromRole="Usuario" ToRole="Estudiante" />
   </EntityType>
@@ -61,11 +61,11 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Idio_Cult" Type="String" Nullable="false" />
-    <Property Name="Experiencia" Type="String" Nullable="false" />
-    <Property Name="Disponibilidad" Type="String" Nullable="false" />
-    <Property Name="Descripcion" Type="String" Nullable="false" />
-    <Property Name="ImagIns" Type="String" Nullable="false" />
+    <Property Name="Idio_Cult" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Experiencia" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Disponibilidad" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ImagIns" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Usuario" Relationship="modelo.UsuarioInstructor" FromRole="Instructor" ToRole="Usuario" />
     <NavigationProperty Name="Cursos" Relationship="modelo.InstructorCurso" FromRole="Instructor" ToRole="Curso" />
   </EntityType>
@@ -74,9 +74,9 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Idio_Cult" Type="String" Nullable="false" />
-    <Property Name="Nivel" Type="String" Nullable="false" />
-    <Property Name="ImagEst" Type="String" Nullable="false" />
+    <Property Name="Idio_Cult" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Nivel" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ImagEst" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Usuario" Relationship="modelo.UsuarioEstudiante" FromRole="Estudiante" ToRole="Usuario" />
     <NavigationProperty Name="DetCrs_Est" Relationship="modelo.EstudianteDetCrs_Est" FromRole="Estudiante" ToRole="DetCrs_Est" />
     <NavigationProperty Name="ResultadoEva" Relationship="modelo.EstudianteResultadoEva" FromRole="Estudiante" ToRole="ResultadoEva" />
@@ -86,12 +86,12 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Nombre" Type="String" Nullable="false" />
-    <Property Name="Nivel" Type="String" Nullable="false" />
-    <Property Name="TpCurso" Type="String" Nullable="false" />
-    <Property Name="ImagCrs" Type="String" Nullable="false" />
-    <Property Name="VideoIntr" Type="String" Nullable="false" />
-    <Property Name="Descripcion" Type="String" Nullable="false" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Nivel" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="TpCurso" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ImagCrs" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="VideoIntr" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Instructor" Relationship="modelo.InstructorCurso" FromRole="Curso" ToRole="Instructor" />
     <Property Name="InstructorId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="DetCrs_Est" Relationship="modelo.CursoDetCrs_Est" FromRole="Curso" ToRole="DetCrs_Est" />
@@ -110,11 +110,11 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Contenido" Type="String" Nullable="false" />
-    <Property Name="Descripcion" Type="String" Nullable="false" />
-    <Property Name="VideoLec" Type="String" Nullable="false" />
-    <Property Name="DocumentoLec" Type="String" Nullable="false" />
-    <Property Name="ImagLec" Type="String" Nullable="false" />
+    <Property Name="Contenido" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="VideoLec" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="DocumentoLec" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ImagLec" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Curso" Relationship="modelo.CursoLeccion" FromRole="Leccion" ToRole="Curso" />
     <Property Name="CursoId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Evaluaciones" Relationship="modelo.LeccionEvaluacion" FromRole="Leccion" ToRole="Evaluacion" />
@@ -124,8 +124,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Descripcion" Type="String" Nullable="false" />
-    <Property Name="DocumentoEva" Type="String" Nullable="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="DocumentoEva" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Leccion" Relationship="modelo.LeccionEvaluacion" FromRole="Evaluacion" ToRole="Leccion" />
     <Property Name="LeccionId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ResultadoEvas" Relationship="modelo.EvaluacionResultadoEva" FromRole="Evaluacion" ToRole="ResultadoEva" />
@@ -187,8 +187,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Comentario" Type="String" Nullable="false" />
-    <Property Name="Valoracion" Type="String" Nullable="false" />
+    <Property Name="Comentario" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Valoracion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Evaluacion" Relationship="modelo.EvaluacionResultadoEva" FromRole="ResultadoEva" ToRole="Evaluacion" />
     <Property Name="EstudianteId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Estudiante" Relationship="modelo.EstudianteResultadoEva" FromRole="ResultadoEva" ToRole="Estudiante" />
