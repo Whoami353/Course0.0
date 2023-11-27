@@ -1,83 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="modelo.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="modeloStoreContainer">
-    <EntitySet Name="Usuarios" EntityType="modelo.Store.Usuarios" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Instructores" EntityType="modelo.Store.Instructores" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Estudiantes" EntityType="modelo.Store.Estudiantes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Cursos" EntityType="modelo.Store.Cursos" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="DetCrs_Est" EntityType="modelo.Store.DetCrs_Est" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Lecciones" EntityType="modelo.Store.Lecciones" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Evaluaciones" EntityType="modelo.Store.Evaluaciones" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ResultadosEva" EntityType="modelo.Store.ResultadosEva" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="UsuarioInstructor" Association="modelo.Store.UsuarioInstructor">
-      <End Role="Usuario" EntitySet="Usuarios" />
-      <End Role="Instructor" EntitySet="Instructores" />
-    </AssociationSet>
-    <AssociationSet Name="UsuarioEstudiante" Association="modelo.Store.UsuarioEstudiante">
-      <End Role="Usuario" EntitySet="Usuarios" />
-      <End Role="Estudiante" EntitySet="Estudiantes" />
-    </AssociationSet>
-    <AssociationSet Name="InstructorCurso" Association="modelo.Store.InstructorCurso">
-      <End Role="Instructor" EntitySet="Instructores" />
-      <End Role="Curso" EntitySet="Cursos" />
-    </AssociationSet>
-    <AssociationSet Name="EstudianteDetCrs_Est" Association="modelo.Store.EstudianteDetCrs_Est">
-      <End Role="Estudiante" EntitySet="Estudiantes" />
-      <End Role="DetCrs_Est" EntitySet="DetCrs_Est" />
-    </AssociationSet>
-    <AssociationSet Name="CursoDetCrs_Est" Association="modelo.Store.CursoDetCrs_Est">
-      <End Role="Curso" EntitySet="Cursos" />
-      <End Role="DetCrs_Est" EntitySet="DetCrs_Est" />
-    </AssociationSet>
-    <AssociationSet Name="CursoLeccion" Association="modelo.Store.CursoLeccion">
-      <End Role="Curso" EntitySet="Cursos" />
-      <End Role="Leccion" EntitySet="Lecciones" />
-    </AssociationSet>
-    <AssociationSet Name="LeccionEvaluacion" Association="modelo.Store.LeccionEvaluacion">
-      <End Role="Leccion" EntitySet="Lecciones" />
-      <End Role="Evaluacion" EntitySet="Evaluaciones" />
-    </AssociationSet>
-    <AssociationSet Name="EvaluacionResultadoEva" Association="modelo.Store.EvaluacionResultadoEva">
-      <End Role="Evaluacion" EntitySet="Evaluaciones" />
-      <End Role="ResultadoEva" EntitySet="ResultadosEva" />
-    </AssociationSet>
-    <AssociationSet Name="EstudianteResultadoEva" Association="modelo.Store.EstudianteResultadoEva">
-      <End Role="Estudiante" EntitySet="Estudiantes" />
-      <End Role="ResultadoEva" EntitySet="ResultadosEva" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Usuarios">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Instructor_Id" Type="int" Nullable="false" />
-    <Property Name="Estudiante_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Instructores">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Idio_Cult" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Experiencia" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Disponibilidad" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ImagIns" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Estudiantes">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Idio_Cult" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Nivel" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ImagEst" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DetCrs_Est_Id" Type="int" Nullable="false" />
-    <Property Name="ResultadoEva_Id" Type="int" Nullable="false" />
-  </EntityType>
+<Schema Namespace="modelo.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Cursos">
     <Key>
       <PropertyRef Name="Id" />
@@ -98,6 +20,37 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
+  <EntityType Name="Estudiantes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Idio_Cult" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nivel" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ImagEst" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DetCrs_Est_Id" Type="int" Nullable="false" />
+    <Property Name="ResultadoEva_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Evaluaciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DocumentoEva" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LeccionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Instructores">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Idio_Cult" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Experiencia" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Disponibilidad" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ImagIns" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
   <EntityType Name="Lecciones">
     <Key>
       <PropertyRef Name="Id" />
@@ -110,15 +63,6 @@
     <Property Name="ImagLec" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CursoId" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Evaluaciones">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DocumentoEva" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="LeccionId" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="ResultadosEva">
     <Key>
       <PropertyRef Name="Id" />
@@ -129,112 +73,168 @@
     <Property Name="EstudianteId" Type="int" Nullable="false" />
     <Property Name="Evaluacion_Id" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="UsuarioInstructor">
-    <End Role="Usuario" Type="modelo.Store.Usuarios" Multiplicity="*" />
-    <End Role="Instructor" Type="modelo.Store.Instructores" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Instructor">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Usuario">
-        <PropertyRef Name="Instructor_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UsuarioEstudiante">
-    <End Role="Usuario" Type="modelo.Store.Usuarios" Multiplicity="*" />
-    <End Role="Estudiante" Type="modelo.Store.Estudiantes" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Estudiante">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Usuario">
-        <PropertyRef Name="Estudiante_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="InstructorCurso">
-    <End Role="Instructor" Type="modelo.Store.Instructores" Multiplicity="1" />
-    <End Role="Curso" Type="modelo.Store.Cursos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Instructor">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Curso">
-        <PropertyRef Name="InstructorId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="EstudianteDetCrs_Est">
-    <End Role="Estudiante" Type="modelo.Store.Estudiantes" Multiplicity="*" />
-    <End Role="DetCrs_Est" Type="modelo.Store.DetCrs_Est" Multiplicity="1" />
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Instructor_Id" Type="int" Nullable="false" />
+    <Property Name="Estudiante_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CursoDetCrs_Est">
+    <End Role="DetCrs_Est" Type="Self.DetCrs_Est" Multiplicity="1" />
+    <End Role="Cursos" Type="Self.Cursos" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="DetCrs_Est">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Estudiante">
+      <Dependent Role="Cursos">
         <PropertyRef Name="DetCrs_Est_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="CursoDetCrs_Est">
-    <End Role="Curso" Type="modelo.Store.Cursos" Multiplicity="*" />
-    <End Role="DetCrs_Est" Type="modelo.Store.DetCrs_Est" Multiplicity="1" />
+  <Association Name="FK_CursoLeccion">
+    <End Role="Cursos" Type="Self.Cursos" Multiplicity="1" />
+    <End Role="Lecciones" Type="Self.Lecciones" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="DetCrs_Est">
+      <Principal Role="Cursos">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Curso">
-        <PropertyRef Name="DetCrs_Est_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CursoLeccion">
-    <End Role="Curso" Type="modelo.Store.Cursos" Multiplicity="1" />
-    <End Role="Leccion" Type="modelo.Store.Lecciones" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Curso">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Leccion">
+      <Dependent Role="Lecciones">
         <PropertyRef Name="CursoId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="LeccionEvaluacion">
-    <End Role="Leccion" Type="modelo.Store.Lecciones" Multiplicity="1" />
-    <End Role="Evaluacion" Type="modelo.Store.Evaluaciones" Multiplicity="*" />
+  <Association Name="FK_EstudianteDetCrs_Est">
+    <End Role="DetCrs_Est" Type="Self.DetCrs_Est" Multiplicity="1" />
+    <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Leccion">
+      <Principal Role="DetCrs_Est">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Evaluacion">
-        <PropertyRef Name="LeccionId" />
+      <Dependent Role="Estudiantes">
+        <PropertyRef Name="DetCrs_Est_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="EvaluacionResultadoEva">
-    <End Role="Evaluacion" Type="modelo.Store.Evaluaciones" Multiplicity="1" />
-    <End Role="ResultadoEva" Type="modelo.Store.ResultadosEva" Multiplicity="*" />
+  <Association Name="FK_EstudianteResultadoEva">
+    <End Role="ResultadosEva" Type="Self.ResultadosEva" Multiplicity="1" />
+    <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Evaluacion">
+      <Principal Role="ResultadosEva">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="ResultadoEva">
-        <PropertyRef Name="Evaluacion_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="EstudianteResultadoEva">
-    <End Role="Estudiante" Type="modelo.Store.Estudiantes" Multiplicity="*" />
-    <End Role="ResultadoEva" Type="modelo.Store.ResultadosEva" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="ResultadoEva">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Estudiante">
+      <Dependent Role="Estudiantes">
         <PropertyRef Name="ResultadoEva_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_EvaluacionResultadoEva">
+    <End Role="Evaluaciones" Type="Self.Evaluaciones" Multiplicity="1" />
+    <End Role="ResultadosEva" Type="Self.ResultadosEva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Evaluaciones">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ResultadosEva">
+        <PropertyRef Name="Evaluacion_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InstructorCurso">
+    <End Role="Instructores" Type="Self.Instructores" Multiplicity="1" />
+    <End Role="Cursos" Type="Self.Cursos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Instructores">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cursos">
+        <PropertyRef Name="InstructorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeccionEvaluacion">
+    <End Role="Lecciones" Type="Self.Lecciones" Multiplicity="1" />
+    <End Role="Evaluaciones" Type="Self.Evaluaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lecciones">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Evaluaciones">
+        <PropertyRef Name="LeccionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuarioEstudiante">
+    <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estudiantes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="Estudiante_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuarioInstructor">
+    <End Role="Instructores" Type="Self.Instructores" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Instructores">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="Instructor_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="modeloStoreContainer">
+    <EntitySet Name="Cursos" EntityType="Self.Cursos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetCrs_Est" EntityType="Self.DetCrs_Est" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Estudiantes" EntityType="Self.Estudiantes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Evaluaciones" EntityType="Self.Evaluaciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Instructores" EntityType="Self.Instructores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Lecciones" EntityType="Self.Lecciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResultadosEva" EntityType="Self.ResultadosEva" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CursoDetCrs_Est" Association="Self.FK_CursoDetCrs_Est">
+      <End Role="DetCrs_Est" EntitySet="DetCrs_Est" />
+      <End Role="Cursos" EntitySet="Cursos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CursoLeccion" Association="Self.FK_CursoLeccion">
+      <End Role="Cursos" EntitySet="Cursos" />
+      <End Role="Lecciones" EntitySet="Lecciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstudianteDetCrs_Est" Association="Self.FK_EstudianteDetCrs_Est">
+      <End Role="DetCrs_Est" EntitySet="DetCrs_Est" />
+      <End Role="Estudiantes" EntitySet="Estudiantes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstudianteResultadoEva" Association="Self.FK_EstudianteResultadoEva">
+      <End Role="ResultadosEva" EntitySet="ResultadosEva" />
+      <End Role="Estudiantes" EntitySet="Estudiantes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EvaluacionResultadoEva" Association="Self.FK_EvaluacionResultadoEva">
+      <End Role="Evaluaciones" EntitySet="Evaluaciones" />
+      <End Role="ResultadosEva" EntitySet="ResultadosEva" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InstructorCurso" Association="Self.FK_InstructorCurso">
+      <End Role="Instructores" EntitySet="Instructores" />
+      <End Role="Cursos" EntitySet="Cursos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeccionEvaluacion" Association="Self.FK_LeccionEvaluacion">
+      <End Role="Lecciones" EntitySet="Lecciones" />
+      <End Role="Evaluaciones" EntitySet="Evaluaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuarioEstudiante" Association="Self.FK_UsuarioEstudiante">
+      <End Role="Estudiantes" EntitySet="Estudiantes" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuarioInstructor" Association="Self.FK_UsuarioInstructor">
+      <End Role="Instructores" EntitySet="Instructores" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>
